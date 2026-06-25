@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo das Bikes - O Blog Interativo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="brightness-overlay"></div>
+
+    <header>
+        <h1>MUNDO DAS BIKES</h1>
+        <p>Explore as modalidades mais insanas do ciclismo</p>
+        
+        <div class="controls">
+            <button onclick="changeFontSize(1)">A+ Aumentar Fonte</button>
+            <button onclick="changeFontSize(-1)">A- Diminuir Fonte</button>
+            <button onclick="changeBrightness(0.1)">☀️ + Brilho</button>
+            <button onclick="changeBrightness(-0.1)">🌙 - Brilho</button>
+        </div>
+    </header>
+
+    <main class="blog-container">
+
+        <section class="modalidade" id="downhill">
+            <h2>Downhill (DH)</h2>
+            <p class="desc-bike"><strong>O que muda na bike:</strong> Feitas para descer montanhas em alta velocidade. Possuem quadros ultra-resistentes, suspensão dupla de longo curso (frente e trás) e freios a disco hidráulicos gigantes para máxima frenagem.</p>
+            
+            <div class="galeria">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1544192240-4a34feb0104c?w=500" alt="Bicicleta de Downhill">
+                    <p class="legenda">A Bike: Geometria baixa e suspensão parruda.</p>
+                </div>
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1571151711936-e042d76b4950?w=500" alt="Piloto de Downhill">
+                    <p class="legenda">O Piloto: Equipado com capacete fechado e armadura protetora contra quedas em pedras.</p>
+                </div>
+            </div>
+
+            <div class="interacao">
+                <button class="like-btn" onclick="toggleLike('dh')">👍 Like (<span id="dh-likes">0</span>)</button>
+                <button class="dislike-btn" onclick="toggleDislike('dh')">👎 Dislike (<span id="dh-dislikes">0</span>)</button>
+            </div>
+
+            <div class="comentarios-secao">
+                <h4>Comentários sobre Downhill</h4>
+                <div class="lista-comentarios" id="dh-comments-list"></div>
+                <div class="form-comentario">
+                    <input type="text" id="dh-input" placeholder="Escreva o que acha do DH...">
+                    <button onclick="addComment('dh')">Enviar</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="modalidade" id="bmx">
+            <h2>BMX</h2>
+            <p class="desc-bike"><strong>O que muda na bike:</strong> São bicicletas pequenas, com rodas aro 20, sem marchas e extremamente ágeis. Não possuem suspensão, priorizando a leveza e a resistência para saltos em rampas ou manobras na rua.</p>
+            
+            <div class="galeria">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1508962914676-134849a727f0?w=500" alt="Bicicleta BMX">
+                    <p class="legenda">A Bike: Quadro compacto, guidão alto e pedaleiras (pegs) nos eixos.</p>
+                </div>
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=500" alt="Piloto de BMX">
+                    <p class="legenda">O Piloto: Focado em estilo, usa proteções leves para garantir total liberdade de movimentos nos giros.</p>
+                </div>
+            </div>
+
+            <div class="interacao">
+                <button class="like-btn" onclick="toggleLike('bmx')">👍 Like (<span id="bmx-likes">0</span>)</button>
+                <button class="dislike-btn" onclick="toggleDislike('bmx')">👎 Dislike (<span id="bmx-dislikes">0</span>)</button>
+            </div>
+
+            <div class="comentarios-secao">
+                <h4>Comentários sobre BMX</h4>
+                <div class="lista-comentarios" id="bmx-comments-list"></div>
+                <div class="form-comentario">
+                    <input type="text" id="bmx-input" placeholder="Escreva o que acha do BMX...">
+                    <button onclick="addComment('bmx')">Enviar</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="modalidade" id="xc">
+            <h2>Cross Country (XC)</h2>
+            <p class="desc-bike"><strong>O que muda na bike:</strong> Focadas em subidas e maratonas de longa distância. São extremamente leves, geralmente feitas de fibra de carbono, usando pneus mais finos com cravos baixos para rolar mais rápido na terra.</p>
+            
+            <div class="galeria">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=500" alt="Bicicleta XC">
+                    <p class="legenda">A Bike: Quadro rígido ou suspensão dianteira leve, focada em eficiência de pedalada.</p>
+                </div>
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=500" alt="Piloto de XC">
+                    <p class="legenda">O Piloto: Atleta de alta resistência cardiopulmonar, focado no ritmo e em roupas coladas aerodinâmicas.</p>
+                </div>
+            </div>
+
+            <div class="interacao">
+                <button class="like-btn" onclick="toggleLike('xc')">👍 Like (<span id="xc-likes">0</span>)</button>
+                <button class="dislike-btn" onclick="toggleDislike('xc')">👎 Dislike (<span id="xc-dislikes">0</span>)</button>
+            </div>
+
+            <div class="comentarios-secao">
+                <h4>Comentários sobre XC</h4>
+                <div class="lista-comentarios" id="xc-comments-list"></div>
+                <div class="form-comentario">
+                    <input type="text" id="xc-input" placeholder="Escreva o que acha do XC...">
+                    <button onclick="addComment('xc')">Enviar</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="modalidade" id="enduro">
+            <h2>Enduro</h2>
+            <p class="desc-bike"><strong>O que muda na bike:</strong> O equilíbrio perfeito entre o XC e o Downhill. Aguentam descidas muito técnicas, mas ainda possuem marchas e geometria que permitem ao piloto subir as montanhas pedalando.</p>
+            
+            <div class="galeria">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1600705722908-bab1e61c0b4d?w=500" alt="Bicicleta de Enduro">
+                    <p class="legenda">A Bike: Suspensão dupla intermediária e canote retrátil para ajustar o selim nas descidas.</p>
+                </div>
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=500" alt="Piloto de Enduro">
+                    <p class="legenda">O Piloto: Precisa de técnica de descida combinada com um excelente preparo físico para subidas longas.</p>
+                </div>
+            </div>
+
+            <div class="interacao">
+                <button class="like-btn" onclick="toggleLike('enduro')">👍 Like (<span id="enduro-likes">0</span>)</button>
+                <button class="dislike-btn" onclick="toggleDislike('enduro')">👎 Dislike (<span id="enduro-dislikes">0</span>)</button>
+            </div>
+
+            <div class="comentarios-secao">
+                <h4>Comentários sobre Enduro</h4>
+                <div class="lista-comentarios" id="enduro-comments-list"></div>
+                <div class="form-comentario">
+                    <input type="text" id="enduro-input" placeholder="Escreva o que acha do Enduro...">
+                    <button onclick="addComment('enduro')">Enviar</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="modalidade" id="grau">
+            <h2>Grau de Bike (Wheelie)</h2>
+            <p class="desc-bike"><strong>O que muda na bike:</strong> Popular na cultura urbana, são montadas para facilitar o equilíbrio em uma roda só. Costumam ter a frente mais leve, freios traseiros extremamente bem regulados e pneus traseiros calibrados para dar estabilidade lateral.</p>
+            
+            <div class="galeria">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1471506480208-91b3a4cc78be?w=500" alt="Bicicleta de Grau">
+                    <p class="legenda">A Bike: Guidão largo, selim inclinado para trás e relação de marchas leve para erguer a frente.</p>
+                </div>
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=500" alt="Piloto dando Grau">
+                    <p class="legenda">O Piloto: Domina o controle do corpo e usa o freio traseiro constantemente para não virar para trás.</p>
+                </div>
+            </div>
+
+            <div class="interacao">
+                <button class="like-btn" onclick="toggleLike('grau')">👍 Like (<span id="grau-likes">0</span>)</button>
+                <button class="dislike-btn" onclick="toggleDislike('grau')">👎 Dislike (<span id="grau-likes">0</span>)</button>
+            </div>
+
+            <div class="comentarios-secao">
+                <h4>Comentários sobre o Grau</h4>
+                <div class="lista-comentarios" id="grau-comments-list"></div>
+                <div class="form-comentario">
+                    <input type="text" id="grau-input" placeholder="Escreva o que acha do Grau...">
+                    <button onclick="addComment('grau')">Enviar</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="comentarios-gerais">
+            <h3>💬 Área de Feedbacks Gerais do Blog</h3>
+            <div class="lista-comentarios" id="geral-comments-list"></div>
+            <div class="form-comentario">
+                <textarea id="geral-input" rows="3" placeholder="O que você achou do nosso blog completo sobre bicicletas? Deixe sua sugestão!"></textarea>
+                <button onclick="addComment('geral')">Postar no Blog</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Criado por um apaixonado por Duas Rodas.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
