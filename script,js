@@ -1,0 +1,64 @@
+// --- SISTEMA DE ACESSIBILIDADE ---
+let currentFontSize = 100; // Porcentagem do tamanho da fonte original
+let currentBrightness = 0;   // Fator de escurecimento (0 = normal, 0.8 = escuro)
+
+function changeFontSize(direction) {
+    currentFontSize += direction * 10;
+    // Impede que fique exageradamente grande ou invisível
+    if(currentFontSize < 70) currentFontSize = 70;
+    if(currentFontSize > 150) currentFontSize = 150;
+    document.documentElement.style.fontSize = currentFontSize + '%';
+}
+
+function changeBrightness(amount) {
+    currentBrightness -= amount; // Menos luz significa maior opacidade do painel preto
+    if (currentBrightness < 0) currentBrightness = 0;
+    if (currentBrightness > 0.8) currentBrightness = 0.8; // Não deixa ficar 100% invisível
+    
+    document.getElementById('brightness-overlay').style.opacity = currentBrightness;
+}
+
+// --- SISTEMA DE CONTROLE DE LIKES ---
+const likesData = {
+    dh: { likes: 0, dislikes: 0 },
+    bmx: { likes: 0, dislikes: 0 },
+    xc: { likes: 0, dislikes: 0 },
+    enduro: { likes: 0, dislikes: 0 },
+    grau: { likes: 0, dislikes: 0 }
+};
+
+function toggleLike(id) {
+    likesData[id].likes++;
+    document.getElementById(`${id}-likes`).innerText = likesData[id].likes;
+}
+
+function toggleDislike(id) {
+    likesData[id].dislikes++;
+    document.getElementById(`${id}-dislikes`).innerText = likesData[id].dislikes;
+}
+
+// --- SISTEMA DE COMENTÁRIOS ---
+function addComment(id) {
+    const inputElement = document.getElementById(`${id}-input`);
+    const commentText = inputElement.value.trim();
+    
+    if (commentText === "") {
+        alert("Por favor, digite um comentário antes de enviar!");
+        return;
+    }
+
+    const listElement = document.getElementById(`${id}-comments-list`);
+    
+    // Cria elemento de comentário visualmente
+    const newComment = document.createElement('div');
+    newComment.classList.add('comentario-item');
+    newComment.innerHTML = `<strong>Anônimo:</strong> ${commentText}`;
+    
+    listElement.appendChild(newComment);
+    
+    // Limpa a caixa de texto
+    inputElement.value = "";
+    
+    // Rola automaticamente para o último comentário enviado
+    listElement.scrollTop = listElement.scrollHeight;
+}
