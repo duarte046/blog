@@ -1,16 +1,98 @@
-// Selecionando os elementos da página
-const botao = document.getElementById('meuBotao');
-const mensagem = document.getElementById('mensagem');
-
-// Adicionando o evento de clique ao botão
-botao.addEventListener('click', () => {
-    // Liga/Desliga a classe 'mostrar' no parágrafo da mensagem
-    mensagem.classList.toggle('mostrar');
+document.addEventListener('DOMContentLoaded', () => {
     
-    // Altera o texto do botão para dar um feedback visual
-    if (mensagem.classList.contains('mostrar')) {
-        botao.textContent = 'Fechar';
-    } else {
-        botao.textContent = 'Clique Aqui';
+    // Funcionalidade do Botão de Curtir
+    const likeBtn = document.getElementById('likeBtn');
+    const likeCount = document.getElementById('likeCount');
+    let totalLikes = 0;
+    let isLiked = false;
+
+    likeBtn.addEventListener('click', () => {
+        if (!isLiked) {
+            totalLikes++;
+            likeBtn.classList.add('liked');
+            isLiked = true;
+        } else {
+            totalLikes--;
+            likeBtn.classList.remove('liked');
+            isLiked = false;
+        }
+        likeCount.textContent = totalLikes;
+    });
+
+    // Variáveis da Lógica do Comentário e Modal
+    const commentForm = document.getElementById('commentForm');
+    const commentText = document.getElementById('commentText');
+    const commentsList = document.getElementById('commentsList');
+    
+    const nameModal = document.getElementById('nameModal');
+    const userNameInput = document.getElementById('userNameInput');
+    const errorAlert = document.getElementById('errorAlert');
+    
+    const confirmCommentBtn = document.getElementById('confirmCommentBtn');
+    const cancelModalBtn = document.getElementById('cancelModalBtn');
+
+    let temporaryCommentHolder = "";
+
+    // Abrir modal de confirmação de nome ao tentar enviar o formulário
+    commentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        temporaryCommentHolder = commentText.value.trim();
+        
+        if (temporaryCommentHolder) {
+            openModal();
+        }
+    });
+
+    // Funções de Controle do Modal
+    function openModal() {
+        nameModal.classList.add('show');
+        userNameInput.focus();
     }
+
+    function closeModal() {
+        nameModal.classList.remove('show');
+        userNameInput.value = "";
+        errorAlert.classList.remove('visible'); // esconde o erro suavemente
+    }
+
+    // Evento de Confirmação dentro do Modal
+    confirmCommentBtn.addEventListener('click', () => {
+        const userName = userNameInput.value.trim();
+
+        if (userName === "") {
+            // Mostra o aviso suave "você precisa colocar um nome"
+            errorAlert.classList.add('visible');
+            userNameInput.focus();
+        } else {
+            // Cria e insere o novo comentário de forma dinâmica
+            const noCommentsText = commentsList.querySelector('.no-comments');
+            if (noCommentsText) {
+                noCommentsText.remove();
+            }
+
+            const commentItem = document.createElement('div');
+            commentItem.classList.add('comment-item');
+            
+            commentItem.innerHTML = `
+                <div class="author">${userName}</div>
+                <div class="text">${temporaryCommentHolder}</div>
+            `;
+
+            commentsList.appendChild(commentItem);
+
+            // Limpa o formulário e fecha o modal
+            commentText.value = "";
+            closeModal();
+        }
+    });
+
+    // Fechar se clicar em cancelar
+    cancelModalBtn.addEventListener('click', closeModal);
+
+    // Fechar se pressionar "Esc"
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nameModal.classList.contains('show')) {
+            closeModal();
+        }
+    });
 });
