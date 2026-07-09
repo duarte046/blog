@@ -1,4 +1,4 @@
-/* Reset básico para limpar margens e fontes padrões */
+/* Configurações Globais & Estilo Minimalista */
 * {
     margin: 0;
     padding: 0;
@@ -6,66 +6,205 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f7f7f9;
-    color: #2d2d2d;
+    font-family: 'Inter', sans-serif;
+    background-color: #fafafa;
+    color: #2b2b2b;
+    line-height: 1.7;
+    padding: 40px 20px;
+}
+
+/* Cabeçalho */
+.blog-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.blog-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: #111;
+}
+
+.blog-header .subtitle {
+    font-size: 1rem;
+    color: #767676;
+    margin-top: 5px;
+    text-transform: lowercase;
+}
+
+/* Container de Conteúdo */
+.container {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.section {
+    margin-bottom: 50px;
+}
+
+.section h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #111;
+}
+
+.section h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 20px 0 10px 0;
+    color: #333;
+}
+
+.section p {
+    font-size: 1.05rem;
+    color: #444;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* Imagens com Estilo Clean */
+.image-wrapper {
+    margin: 30px 0;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    filter: grayscale(15%);
+    transition: filter 0.3s ease;
+}
+
+.image-wrapper img:hover {
+    filter: grayscale(0%);
+}
+
+.image-caption {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* Botão de Curtida Suave */
+.blog-actions {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    margin: 40px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
 }
 
-.container {
-    text-align: center;
-    padding: 40px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    max-width: 400px;
-    width: 100%;
-}
-
-h1 {
-    font-size: 2rem;
-    font-weight: 400;
-    margin-bottom: 12px;
-}
-
-p {
-    font-size: 1rem;
-    color: #666666;
-    margin-bottom: 24px;
-}
-
-/* Botão com efeito de transição suave */
-.btn {
-    background-color: #111111;
-    color: #ffffff;
-    border: none;
-    padding: 12px 24px;
+.like-button {
+    background: transparent;
+    border: 1px solid #ddd;
+    padding: 10px 24px;
     font-size: 0.95rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #555;
+}
+
+.like-button:hover {
+    background-color: #fff0f0;
+    border-color: #ffb3b3;
+    color: #e04848;
+}
+
+.like-button.liked {
+    background-color: #ffe5e5;
+    border-color: #ff9999;
+    color: #d11a1a;
+}
+
+.heart-icon {
+    margin-right: 5px;
+}
+
+/* Área de Comentários */
+.comments-section {
+    margin-top: 40px;
+}
+
+.comments-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.comments-list {
+    margin-bottom: 30px;
+}
+
+.no-comments {
+    color: #999;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.comment-item {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.comment-item .author {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.comment-item .text {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 90px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: none;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.comment-form textarea:focus {
+    border-color: #999;
+}
+
+.submit-btn {
+    background-color: #111;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
     border-radius: 6px;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #333333;
-    transform: translateY(-1px);
-}
-
-/* Estilo para a mensagem que vai aparecer */
-.mensagem-oculta {
-    margin-top: 20px;
     font-size: 0.9rem;
-    color: #00b4d8;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.4s ease;
-    pointer-events: none;
+    transition: background 0.2s;
 }
 
-.mensagem-oculta.mostrar {
-    opacity: 1;
-    transform: translateY(0);
+.submit-btn:hover {
+    background-color: #333;
 }
+
+/* Modal e Avisos Suaves */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
